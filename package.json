@@ -1,0 +1,21 @@
+{
+  "name": "finalprojectdatabase",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.15.5",
+    "file-system": "^2.2.2",
+    "jade": "~1.11.0",
+    "mongoose": "^4.13.12",
+    "morgan": "~1.9.0",
+    "nodemailer": "^4.6.3",
+    "serve-favicon": "~2.4.5",
+    "url": "^0.11.0"
+  }
+}

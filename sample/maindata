@@ -1,0 +1,105 @@
+// importing json data containing userformdata
+var userdatafile = fs.readFileSync('userformdata.json');
+var userdata = fs.readFileSync('userdata.json');
+//create an object to access json data
+var userformdataobject = JSON.parse(userdatafile);
+var userdataobject = JSON.parse(userdata);
+
+
+////////////// this is the data from the user form
+checkingstatus = function(namenode) {
+  var length = userdataobject.length;
+  for(var i=0 ; i<=length ; i+=1) {
+   if(userformdataobject[i].key == namenode) {
+     return i;
+   }
+ }
+ return -1;
+}
+var userformdataobjectlength = userdataobject.length;
+console.log(userformdataobjectlength);
+if(userformdataobjectlength == 0) {
+  returneddata = -1;
+}
+else {
+  var returneddata = checkingstatus('gurusainath'); /* this value is came for the login it depends according to log */
+  // console.log(returneddata);
+}
+if(returneddata >= 0) {
+  // storing the requirements data in USERDATA.JSON
+  userdataobject[returneddata].values.push(userformrequirements);
+  var json = JSON.stringify(userdataobject, null, 2);
+  console.log(json);
+  fs.writeFile('userdata.json', json, function (err) {
+  if (err) throw err;
+    console.log('Updated!');
+  });
+  // storing the requirements data in USERFORMDATA.JSON
+  var finalizeduserformdata = '{"key":"'+userformrequirements.creatorname+'_'+userformrequirements.date+'","values":[]}';
+  var stingtojsonuserformdata = JSON.parse(finalizeduserformdata);
+  userformdataobject.push(stingtojsonuserformdata);
+  var userformjson = JSON.stringify(userformdataobject, null, 2);
+  fs.writeFile('userformdata.json', userformjson, function (err) {
+  if (err) throw err;
+    console.log('Updated!');
+    response.send('Updated!');
+  });
+}
+else {
+  // storing the requirements data in USERDATA.JSON
+  var jsontostringdata = JSON.stringify(userformrequirements);
+  var finalizeduserdata = '{"key":"'+userformrequirements.creatorname+'","values":['+jsontostringdata+']}';
+  var stingtojsondata = JSON.parse(finalizeduserdata);
+  userdataobject.push(stingtojsondata);
+  var json = JSON.stringify(userdataobject, null, 2);
+  fs.writeFile('userdata.json', json, function (err) {
+  if (err) throw err;
+    console.log('Updated!');
+  });
+  // storing the requirements data in USERFORMDATA.JSON
+  var finalizeduserformdata = '{"key":"'+userformrequirements.creatorname+'_'+userformrequirements.date+'","values":[]}';
+  var stingtojsonuserformdata = JSON.parse(finalizeduserformdata);
+  userformdataobject.push(stingtojsonuserformdata);
+  var userformjson = JSON.stringify(userformdataobject, null, 2);
+  fs.writeFile('userformdata.json', userformjson, function (err) {
+  if (err) throw err;
+    console.log('Updated!');
+    reaponse.send('updated!');
+  });
+}
+
+
+
+
+// check the user that already exists or not
+checkingdata = function(name) {
+  var length = userformdataobject.length;
+   for(var i=0 ; i<=length ; i+=1) {
+    if(userformdataobject[i].key == name) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+
+console.log(getdata);
+var returneddata = checkingdata('gurusainath'); /* this value is came for the login it depends according to log */
+console.log(returneddata);
+if(returneddata >= 0) {
+  console.log('true');
+  console.log(userformdataobject.length);
+  userformdataobject[returneddata].values.push(getdata);
+  var json = JSON.stringify(userformdataobject, null, 2);
+  fs.writeFile('userformdata.json', json, function (err) {
+  if (err) throw err;
+    console.log('Updated!');
+    response.send('Updated!');
+  });
+}
+else {
+  console.log('false');
+}
+
+// console.log(userformdataobject['gurusainath'].value[0].name);
+// console.log(userformdataobject[0].value.length);
